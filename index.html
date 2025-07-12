@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>TechBot</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="chat-container">
+    <h2>👋 Welcome to TechBot! How can I assist you today?</h2>
+    <div id="chat-box"></div>
+    <input type="text" id="user-input" placeholder="Type your message..." />
+    <button onclick="sendMessage()">Send</button>
+
+    <div id="feedback-form" style="display:none;">
+      <h3>📝 We'd love your feedback</h3>
+      <textarea id="feedback" placeholder="Type your feedback here..."></textarea>
+      <button onclick="submitFeedback()">Submit Feedback</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
