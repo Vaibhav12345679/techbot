@@ -8,25 +8,20 @@ function sendMessage() {
   chatBox.innerHTML += `<div><b>You:</b> ${message}</div>`;
   input.value = "";
 
-  fetch("https://api.openai.com/v1/chat/completions", {
+  fetch("https://techoftheworld.great-site.net/send-chat.php", {
     method: "POST",
     headers: {
-      "Content-Type": "application/json",
-      "Authorization": "Bearer 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"
+      "Content-Type": "application/x-www-form-urlencoded"
     },
-    body: JSON.stringify({
-      model: "gpt-3.5-turbo",
-      messages: [{ role: "user", content: message }]
-    })
+    body: "message=" + encodeURIComponent(message)
   })
-  .then(res => res.json())
-  .then(data => {
-    const reply = data.choices?.[0]?.message?.content || "Sorry, I didn't understand.";
+  .then(res => res.text())
+  .then(reply => {
     chatBox.innerHTML += `<div><b>TechBot:</b> ${reply}</div>`;
     document.getElementById("feedback-form").style.display = "block";
   })
-  .catch(err => {
-    chatBox.innerHTML += `<div><b>TechBot:</b> Error talking to server.</div>`;
+  .catch(() => {
+    chatBox.innerHTML += `<div><b>TechBot:</b> Failed to connect.</div>`;
   });
 }
 
@@ -35,7 +30,9 @@ function submitFeedback() {
   if (!feedback) return alert("Please enter your feedback.");
   fetch("https://techoftheworld.great-site.net/send-feedback.php", {
     method: "POST",
-    headers: {"Content-Type": "application/x-www-form-urlencoded"},
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded"
+    },
     body: "feedback=" + encodeURIComponent(feedback)
   }).then(() => {
     alert("Thanks for your feedback!");
