@@ -8,7 +8,7 @@ function sendMessage() {
   chatBox.innerHTML += `<div><b>You:</b> ${message}</div>`;
   input.value = "";
 
-  fetch("https://techoftheworld.great-site.net/send-chat.php", {
+  fetch("https://techoftheworld.great-site.net/?techbot", {
     method: "POST",
     headers: {
       "Content-Type": "application/x-www-form-urlencoded"
